@@ -8,11 +8,11 @@ public class PostsService
 {
     private readonly IMongoCollection<Post> _postsCollection;
 
-    public BooksService(
+    public PostsService(
         IOptions<BlogDatabaseSettings> blogDatabaseSettings)
     {
         var mongoClient = new MongoClient(
-            blogDatabaseSettings.Value.ConnectionString);
+            DotNetEnv.Env.GetString("CON_STRING"));
 
         var mongoDatabase = mongoClient.GetDatabase(
             blogDatabaseSettings.Value.DatabaseName);
@@ -25,14 +25,14 @@ public class PostsService
         await _postsCollection.Find(_ => true).ToListAsync();
 
     public async Task<Post?> GetAsync(string id) =>
-        await _postsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        await _postsCollection.Find(x => x._id == id).FirstOrDefaultAsync();
 
     public async Task CreateAsync(Post newPost) =>
         await _postsCollection.InsertOneAsync(newPost);
 
     public async Task UpdateAsync(string id, Post updatedPost) =>
-        await _postsCollection.ReplaceOneAsync(x => x.Id == id, updatedPost);
+        await _postsCollection.ReplaceOneAsync(x => x._id == id, updatedPost);
 
     public async Task RemoveAsync(string id) =>
-        await _postsCollection.DeleteOneAsync(x => x.Id == id);
+        await _postsCollection.DeleteOneAsync(x => x._id == id);
 }

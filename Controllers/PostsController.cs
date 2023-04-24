@@ -31,15 +31,16 @@ public class PostsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(Post Post)
+    public async Task<IActionResult> Post([FromForm] Post newPost)
     {
         await _postsService.CreateAsync(newPost);
 
-        return CreatedAtAction(nameof(Get), new { id = newPost.Id }, newPost);
+        return CreatedAtAction(nameof(Get), new { _id = newPost._id }, newPost);
     }
 
     [HttpPut("{id:length(24)}")]
-    public async Task<IActionResult> Update(string id, Book updatedPost)
+    public async Task<IActionResult> Update( string id,
+    [FromForm] Post updatedPost)
     {
         var post = await _postsService.GetAsync(id);
 
@@ -48,7 +49,7 @@ public class PostsController : ControllerBase
             return NotFound();
         }
 
-        updatedPost.Id = post.Id;
+        updatedPost._id = post._id;
 
         await _postsService.UpdateAsync(id, updatedPost);
 

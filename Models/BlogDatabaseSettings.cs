@@ -1,4 +1,4 @@
-namespace BlotApi.Models;
+namespace BlogApi.Models;
 
 public class BlogDatabaseSettings
 {

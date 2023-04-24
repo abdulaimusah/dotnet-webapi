@@ -8,17 +8,22 @@ public class Post
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
+    public string? _id { get; set; }
 
-    [BsonElement("Title")]
-    [JsonPropertyName("Name")]
-    public string PostTitle { get; set; } = null!;
+    public string title {get; set; } = null!;
+
+    //[BsonElement("Title")]
+    //[JsonPropertyName("Name")]
+    public string author { get; set; } = null!;
 
     //public decimal Price { get; set; }
 
-    public string Content { get; set; } = null!;
+    public string content { get; set; } = null!;
 
-    public string Author { get; set; } = null!;
+    public string category { get; set; } = null!;
 
-    public DateTime PostTime { get; set; } = null!;
+    public DateTime? createdAt { get; set; } 
+
+    public DateTime? modified { get; set; } 
+
 }

@@ -1,14 +1,17 @@
-using BookStoreApi.Models;
-using BookStoreApi.Services;
+using BlogApi.Models;
+using BlogApi.Services;
+using DotNetEnv;
 
+DotNetEnv.Env.Load();
+DotNetEnv.Env.TraversePath().Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.Configure<BookStoreDatabaseSettings>(
+builder.Services.Configure<BlogDatabaseSettings>(
     builder.Configuration.GetSection("BlogDatabase"));
 
-builder.Services.AddSingleton<BooksService>();
+builder.Services.AddSingleton<PostsService>();
 
 builder.Services.AddControllers()
          .AddJsonOptions(
@@ -26,7 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
