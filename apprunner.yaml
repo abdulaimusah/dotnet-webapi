@@ -17,4 +17,4 @@ run:
     env: APP_PORT
   env:
     - name: ASPNETCORE_URLS
-      value: "http://*:5000;https://*5000"
+      value: "http://*:5000;https://*:5000"
