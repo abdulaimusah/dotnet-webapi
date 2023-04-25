@@ -2,12 +2,10 @@ version: 1.0
 runtime: dotnet6
 build:
   commands:
-    pre-build:
-      - scripts/prebuild.sh
+    
     build:
       - dotnet publish -c Release -o out
-    post-build:
-      - scripts/postbuild.sh
+    
     
 run:
   runtime-version: 6.0.9
