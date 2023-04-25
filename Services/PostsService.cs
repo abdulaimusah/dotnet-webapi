@@ -12,7 +12,7 @@ public class PostsService
         IOptions<BlogDatabaseSettings> blogDatabaseSettings)
     {
         var mongoClient = new MongoClient(
-            DotNetEnv.Env.GetString("CON_STRING"));
+            DotNetEnv.Env.GetString("ATLAS_URI"));
 
         var mongoDatabase = mongoClient.GetDatabase(
             blogDatabaseSettings.Value.DatabaseName);
