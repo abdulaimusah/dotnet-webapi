@@ -8,11 +8,15 @@ public class PostsService
 {
     private readonly IMongoCollection<Post> _postsCollection;
 
+    private readonly IConfiguration _configuration;
+
     public PostsService(
-        IOptions<BlogDatabaseSettings> blogDatabaseSettings)
-    {
+        IOptions<BlogDatabaseSettings> blogDatabaseSettings,
+        IConfiguration configuration )
+    {   
+       _configuration = configuration ;
         var mongoClient = new MongoClient(
-            DotNetEnv.Env.GetString("ATLAS_URI"));
+            _configuration.GetValue<string>("ATLAS_URI"));
 
         var mongoDatabase = mongoClient.GetDatabase(
             blogDatabaseSettings.Value.DatabaseName);
