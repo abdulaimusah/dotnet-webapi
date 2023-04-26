@@ -1,6 +1,7 @@
 using BlogApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System;
 
 namespace BlogApi.Services;
 
@@ -8,15 +9,14 @@ public class PostsService
 {
     private readonly IMongoCollection<Post> _postsCollection;
 
-    private readonly IConfiguration _configuration;
+    // private readonly IConfiguration _configuration;
 
     public PostsService(
-        IOptions<BlogDatabaseSettings> blogDatabaseSettings,
-        IConfiguration configuration )
+        IOptions<BlogDatabaseSettings> blogDatabaseSettings)
     {   
-       _configuration = configuration ;
+       
         var mongoClient = new MongoClient(
-            _configuration.GetValue<string>("ATLAS_URI"));
+            Environment.GetEnvironmentVariable("ATLAS_URI"));
 
         var mongoDatabase = mongoClient.GetDatabase(
             blogDatabaseSettings.Value.DatabaseName);

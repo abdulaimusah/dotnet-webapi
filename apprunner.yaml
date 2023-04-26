@@ -18,3 +18,5 @@ run:
   env:
     - name: ASPNETCORE_URLS
       value: "http://0.0.0.0:5000;https://0.0.0.0:5001"
+    - name: ATLAS_URI
+      value: "mongodb+srv://abdulai:P%40ncha27@cluster0.blt8o4a.mongodb.net/?retryWrites=true&w=majority"
